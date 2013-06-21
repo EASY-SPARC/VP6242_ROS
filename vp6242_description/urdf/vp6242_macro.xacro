@@ -45,13 +45,19 @@
 	            <geometry>
                     <mesh filename="${mesh_path}/visual/base.dae" scale="${mesh_scale}"/>
                 </geometry>
-                <xacro:mesh_origin/>               
+                <xacro:mesh_origin/>
+                <material name="blue">
+					<color rgba="0 0 1 1"/>
+				</material>               
             </visual>
             <collision> 
 	  	        <geometry>
   	                <mesh filename="${mesh_path}/collision/base.dae" scale="${mesh_scale}"/>
         	  	</geometry>
                 <xacro:mesh_origin/>
+                <material name="yellow">
+					<color rgba="0 1 1 1"/>
+				</material>
             </collision>    
             <inertial>
               <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -195,9 +201,9 @@
             <parent link="${prefix}base_link"/>
             <child link="${prefix}link1"/>
             <axis xyz="0 0 1"/>
-            <limit 
-                upper="${joint1_max}"               
+            <limit             
                 lower="${joint1_min}" 
+                upper="${joint1_max}"   
                 effort="${default_joint_effort}" 
                 velocity="${default_joint_velocity}" />
             <dynamics damping="0.7"/>
@@ -208,8 +214,8 @@
             <child link="${prefix}link2"/>                   
             <axis xyz="0 1 0"/>
             <limit 
-                upper="${joint2_max}"               
                 lower="${joint2_min}" 
+                upper="${joint2_max}"                               
                 effort="${default_joint_effort}" 
                 velocity="${default_joint_velocity}" />
             <dynamics damping="0.7"/>      
@@ -220,8 +226,8 @@
             <child link="${prefix}link3"/>
             <axis xyz="0 1 0"/>
             <limit 
-                upper="${joint3_max}"               
                 lower="${joint3_min}" 
+                upper="${joint3_max}"               
                 effort="${default_joint_effort}"                  
                 velocity="${default_joint_velocity}"/>
             <dynamics damping="0.7"/>                
@@ -233,8 +239,8 @@
             <child link="${prefix}link4"/>    
             <axis xyz="0 0 1"/>
             <limit 
-                upper="${joint4_max}"               
                 lower="${joint4_min}" 
+                upper="${joint4_max}"               
                 effort="${default_joint_effort}" 
                 velocity="${default_joint_velocity}"/>
             <dynamics damping="0.7"/>                
@@ -245,8 +251,8 @@
             <child link="${prefix}link5"/>
             <axis xyz="0 1 0"/>
             <limit
-                upper="${joint5_max}"               
                 lower="${joint5_min}" 
+                upper="${joint5_max}"               
                 effort="${default_joint_effort}"
                 velocity="${default_joint_velocity}"/>
             <dynamics damping="0.7"/>                
@@ -257,8 +263,8 @@
             <child link="${prefix}link6"/>
             <axis xyz="0 0 1"/>
             <limit 
-                upper="${joint6_max}"               
-                lower="${joint6_min}"                     
+                lower="${joint6_min}"               
+                upper="${joint6_max}"                     
                 effort="${default_joint_effort}" 
                 velocity="${default_joint_velocity}"/>
             <dynamics damping="0.7"/>       
