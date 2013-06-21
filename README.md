@@ -1,4 +1,4 @@
 hiveground-robots
 =================
 
-Various descriptions and settings from HiveGround and off the shelf robots
+Various descriptions and settings for robots from HiveGround and other makers
