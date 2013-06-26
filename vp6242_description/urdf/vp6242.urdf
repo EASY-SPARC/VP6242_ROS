@@ -156,7 +156,7 @@
     </visual>
   </link>
   <link name="tool0"/>
-  <joint name="fixed" type="fixed">
+  <joint name="world-base" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
   </joint>

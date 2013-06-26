@@ -38,7 +38,7 @@
     
     <xacro:macro name="vp6242" params="prefix">     
  <!-- Used for fixing robot to Gazebo 'base_link' -->
-        <link name="world"/>                  
+        <link name="${prefix}world"/>
         <link name="${prefix}base_link">
             <xacro:default_inertial mass="10"/>
             <visual>
@@ -192,9 +192,9 @@
         <link name="${prefix}tool0"/>
         
         <!-- Joint list -->
-        <joint name="fixed" type="fixed">
-             <parent link="world"/>
-             <child link="${prefix}base_link"/>
+        <joint name="${prefix}world-base" type="fixed">
+            <parent link="${prefix}world"/>
+            <child link="${prefix}base_link"/>            
         </joint>
         <joint name="${prefix}joint1" type="revolute">
             <origin rpy="0 0 0" xyz="0.0 0.0 0.155"/>
