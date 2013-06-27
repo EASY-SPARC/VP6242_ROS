@@ -540,7 +540,6 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            moveit_msgs::MoveItErrorCodes &error_code,
                                            bool lock_redundancy) const
 {
-  ROS_INFO("1");
   const IKCallbackFn solution_callback = 0; 
   std::vector<double> consistency_limits;
 
@@ -562,7 +561,6 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            moveit_msgs::MoveItErrorCodes &error_code,
                                            bool lock_redundancy) const
 {
-  ROS_INFO("2");
   const IKCallbackFn solution_callback = 0; 
   return searchPositionIK(ik_pose,
                           ik_seed_state,
@@ -582,7 +580,6 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            moveit_msgs::MoveItErrorCodes &error_code,
                                            bool lock_redundancy) const
 {
-  ROS_INFO("3");
   std::vector<double> consistency_limits;
   return searchPositionIK(ik_pose,
                           ik_seed_state,
@@ -603,7 +600,6 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                               moveit_msgs::MoveItErrorCodes &error_code,
                                               bool lock_redundant_joints) const
 {
-  ROS_INFO("4");
   ROS_DEBUG_STREAM_NAMED("ikfast","searchPositionIK");
 
   // Check if there are no redundant joints
