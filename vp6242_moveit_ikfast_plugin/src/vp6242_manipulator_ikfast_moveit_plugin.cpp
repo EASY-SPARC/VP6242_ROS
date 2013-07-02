@@ -540,7 +540,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            moveit_msgs::MoveItErrorCodes &error_code,
                                            bool lock_redundancy) const
 {
-  const IKCallbackFn solution_callback = 0; 
+  const IKCallbackFn solution_callback = 0;
   std::vector<double> consistency_limits;
 
   return searchPositionIK(ik_pose,
