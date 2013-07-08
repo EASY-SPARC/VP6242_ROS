@@ -7,10 +7,10 @@
   <xacro:macro name="mesh_origin">
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </xacro:macro>
-  <xacro:property name="mesh_path" value="package://hg-agv_description/meshes" />
+  <xacro:property name="mesh_path" value="package://hg_agv_description/meshes" />
   <xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
         
-  <xacro:macro name="hg-agv" params="prefix">
+  <xacro:macro name="hg_agv" params="prefix">
 
     <link name="${prefix}mobile_base"/>   
     <link name="${prefix}base_link">

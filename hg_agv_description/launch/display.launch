@@ -1,6 +1,6 @@
 <launch>
   <param name="robot_description"
-    command="$(find xacro)/xacro.py '$(find hg-agv_description)/urdf/hg-agv.xacro'" />
+    command="$(find xacro)/xacro.py '$(find hg_agv_description)/urdf/hg_agv.xacro'" />
 
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
@@ -10,5 +10,5 @@
   <!-- Combine joint values -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
   
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hg-agv_description)/launch/hg-agv.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hg_agv_description)/launch/hg_agv.rviz"/>
 </launch>
