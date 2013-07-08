@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Limits Joint: J1 J2 J3 J4 J5 J6 
+               Max : 160 120 160 160 120 360 
+               Min :-160 -120 19 -160 -120 -360 -->
+
+  <xacro:macro name="mesh_origin">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </xacro:macro>
+  <xacro:property name="mesh_path" value="package://hg-agv_description/meshes" />
+  <xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
+        
+  <xacro:macro name="hg-agv" params="prefix">
+
+    <link name="${prefix}mobile_base"/>   
+    <link name="${prefix}base_link">
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/main.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>        
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/main_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>        
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="5"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+    </link>
+    
+    <joint name="${prefix}mobile-base" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0.111"/>
+      <parent link="${prefix}mobile_base"/>
+      <child link="${prefix}base_link"/>
+    </joint>
+    
+    <link name="${prefix}left_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/left_wheel.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/left_wheel_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+    </link>
+    
+    <joint name="${prefix}left_wheel_joint" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="0 0.1956 0"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}left_wheel"/>
+    </joint>
+    
+    <link name="${prefix}right_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/right_wheel.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/right_wheel_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+    </link>
+    
+    <joint name="${prefix}right_wheel_joint" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="0 -0.1956 0"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}right_wheel"/>
+    </joint>
+    
+    <link name="${prefix}urg04lx">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/urg04lx.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/urg04lx_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+    </link>
+    
+    <joint name="${prefix}base-urg40lx" type="fixed">
+      <origin rpy="0 0 0" xyz="0.08 0 0.134"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}urg04lx"/>
+    </joint>
+    
+    <link name="${prefix}utm30lx">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/utm30lx.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/utm30lx_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+      </inertial>
+    </link>
+    
+    <joint name="${prefix}base-utm30lx" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.1805 0 1.914"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}utm30lx"/>
+    </joint>
+  
+
+  </xacro:macro>
+</robot>
