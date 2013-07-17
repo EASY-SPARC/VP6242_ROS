@@ -62,6 +62,26 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        clip_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        clip_cover:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        force_sensor_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lead:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         link1:
           Alpha: 1
           Show Axes: false
@@ -104,6 +124,14 @@ Visualization Manager:
       Frames:
         /base_link:
           Value: true
+        /clip_base:
+          Value: true
+        /clip_cover:
+          Value: true
+        /force_sensor_base:
+          Value: true
+        /lead:
+          Value: true
         /link1:
           Value: true
         /link2:
@@ -136,7 +164,12 @@ Visualization Manager:
                     /link5:
                       /link6:
                         /tool0:
-                          {}
+                          /force_sensor_base:
+                            /clip_base:
+                              /clip_cover:
+                                {}
+                              /lead:
+                                {}
       Update Interval: 0
       Value: true
     - Class: rviz/Axes
@@ -169,17 +202,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.32802
+      Distance: 0.700421
       Focal Point:
-        X: 0.228126
-        Y: 0.117988
-        Z: 0.280283
+        X: 0.347237
+        Y: 0.053453
+        Z: 0.407394
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.389796
+      Pitch: 0.099797
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.487273
+      Yaw: 1.33407
     Saved: ~
 Window Geometry:
   Displays:
