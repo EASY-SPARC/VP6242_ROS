@@ -60,6 +60,11 @@ Visualization Manager:
       Collision Enabled: false
       Enabled: true
       Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
         base_link:
           Alpha: 1
           Show Axes: false
@@ -85,6 +90,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        mobile_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         right_swivel_base:
           Alpha: 1
           Show Axes: false
@@ -105,6 +114,14 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        urg04lx:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        utm30lx:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -196,17 +213,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.48169
+      Distance: 3.05543
       Focal Point:
         X: -0.273925
         Y: -0.0850814
         Z: 0.278508
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: -0.504795
+      Pitch: 0.365213
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.01041
+      Yaw: 1.24043
     Saved: ~
 Window Geometry:
   Displays:

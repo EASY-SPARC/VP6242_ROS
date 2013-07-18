@@ -9,9 +9,95 @@
   </xacro:macro>
   <xacro:property name="mesh_path" value="package://hg_agv_description/meshes" />
   <xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
+  <xacro:property name="pi" value="3.141592" />
+  
+  <xacro:macro name="swivel" params="side reflect">
+    <link name="${prefix}${side}_swivel_base">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_base.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      </visual>
+    </link>
+    <joint name="${prefix}base_${side}_swivel_base" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.6045 ${reflect*0.12} -0.012"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}${side}_swivel_base"/>
+    </joint>
+    <link name="${prefix}${side}_swivel_cover">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_cover.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      </visual>
+    </link>
+    <joint name="${prefix}${side}_swivel_base_cover" type="continuous">
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      <parent link="${prefix}${side}_swivel_base"/>
+      <child link="${prefix}${side}_swivel_cover"/>
+    </joint>
+    <link name="${prefix}${side}_swivel_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_wheel.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>
+      </visual>
+      <!--collision>
+        <geometry>
+          <cylinder length="0.02" radius="0.038"/>
+        </geometry>
+        <origin rpy="${pi/2} 0 0" xyz="0 0 0"/>   
+      </collision-->
+    </link>
+    <joint name="${prefix}${side}_swivel_cover_wheel" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      <parent link="${prefix}${side}_swivel_cover"/>
+      <child link="${prefix}${side}_swivel_wheel"/>
+    </joint>
+  </xacro:macro>
+  
+  <xacro:macro name="wheel" params="side reflect flip">
+    <link name="${prefix}${side}_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/wheel.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 ${flip*pi}" xyz="0 0 0"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/wheel_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 ${flip*pi}" xyz="0 0 0"/>
+      </collision>
+      <!--inertial>
+        <mass value="1.031"/> 
+        <origin xyz="0 ${reflect*0.015293} 0"/>
+          <inertia ixx="0.005" ixy="0" ixz="0"
+                   iyy="0.007" iyz="0" izz="0.005"/>
+      </inertial-->    
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" 
+                  iyy="1.0" iyz="0.0" 
+                  izz="1.0"/>
+      </inertial>
+    </link>    
+    <joint name="${prefix}${side}_wheel_joint" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="0 ${reflect*0.1956} 0"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}${side}_wheel"/>
+    </joint>
+  </xacro:macro>
         
   <xacro:macro name="hg_agv" params="prefix">
-
     <link name="${prefix}mobile_base"/>   
     <link name="${prefix}base_link">
       <visual>
@@ -26,11 +112,18 @@
         </geometry>
         <xacro:mesh_origin/>        
       </collision>
-      <inertial>
+      <!--inertial>
         <origin xyz="-0.091316 0 0.184078" rpy="0 0 0"/>
         <mass value="23.911"/>
         <inertia  ixx="5.748" ixy="3.453" ixz="0.413" 
                   iyy="6.144" iyz="0.002" izz="1.131"/>
+      </inertial-->
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" 
+                  iyy="1.0" iyz="0.0" 
+                  izz="1.0"/>
       </inertial>
     </link>
     
@@ -39,146 +132,13 @@
       <parent link="${prefix}mobile_base"/>
       <child link="${prefix}base_link"/>
     </joint>
+   
+    <xacro:wheel side="left" reflect="1" flip="0"/>
+    <xacro:wheel side="right" reflect="-1" flip="1"/>
+
+    <xacro:swivel side="left" reflect="1" />
+    <xacro:swivel side="right" reflect="-1" />
     
-    <link name="${prefix}left_wheel">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/left_wheel.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="${mesh_path}/left_wheel_collision.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </collision>
-      <inertial>
-        <mass value="1.031"/> 
-        <origin xyz="0 0.015293 0"/>
-          <inertia ixx="0.005" ixy="0" ixz="0"
-                   iyy="0.007" iyz="0" izz="0.005"/>
-      </inertial>    
-    </link>
-    
-    <joint name="${prefix}left_wheel_joint" type="continuous">
-      <axis xyz="0 1 0"/>
-      <origin rpy="0 0 0" xyz="0 0.1956 0"/>
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}left_wheel"/>
-    </joint>
-    
-    <link name="${prefix}right_wheel">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/right_wheel.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="${mesh_path}/right_wheel_collision.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </collision>
-      <inertial>
-        <mass value="1.031"/> 
-        <origin xyz="0 -0.015293 0"/>
-          <inertia ixx="0.005" ixy="0" ixz="0"
-                   iyy="0.007" iyz="0" izz="0.005"/>
-      </inertial>    
-    </link>    
-    <joint name="${prefix}right_wheel_joint" type="continuous">
-      <axis xyz="0 1 0"/>
-      <origin rpy="0 0 0" xyz="0 -0.1956 0"/>
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}right_wheel"/>
-    </joint>
-    
-    
-    <link name="${prefix}left_swivel_base">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_base.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0 0 -0.01"/>
-      </visual>
-    </link>
-    <joint name="${prefix}base_left_swivel_base" type="fixed">
-      <origin rpy="0 0 0" xyz="-0.605 0.12 -0.012"/>
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}left_swivel_base"/>
-    </joint>
-    <link name="${prefix}left_swivel_cover">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_cover.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
-      </visual>
-    </link>
-    <joint name="${prefix}left_swivel_base_cover" type="continuous">
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="0 0 -0.01"/>
-      <parent link="${prefix}left_swivel_base"/>
-      <child link="${prefix}left_swivel_cover"/>
-    </joint>
-    <link name="${prefix}left_swivel_wheel">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_wheel.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </visual>
-    </link>
-    <joint name="${prefix}left_swivel_cover_wheel" type="continuous">
-      <axis xyz="0 1 0"/>
-      <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
-      <parent link="${prefix}left_swivel_cover"/>
-      <child link="${prefix}left_swivel_wheel"/>
-    </joint>
-    
-    <link name="${prefix}right_swivel_base">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_base.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0 0 -0.01"/>
-      </visual>
-    </link>
-    <joint name="${prefix}base_right_swivel_base" type="fixed">
-      <origin rpy="0 0 0" xyz="-0.605 -0.12 -0.012"/>
-      <parent link="${prefix}base_link"/>
-      <child link="${prefix}right_swivel_base"/>
-    </joint>
-    <link name="${prefix}right_swivel_cover">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_cover.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
-      </visual>
-    </link>
-    <joint name="${prefix}right_swivel_base_cover" type="continuous">
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="0 0 -0.01"/>
-      <parent link="${prefix}right_swivel_base"/>
-      <child link="${prefix}right_swivel_cover"/>
-    </joint>
-    <link name="${prefix}right_swivel_wheel">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/swivel_wheel.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </visual>
-    </link>
-    <joint name="${prefix}right_swivel_cover_wheel" type="continuous">
-      <axis xyz="0 1 0"/>
-      <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
-      <parent link="${prefix}right_swivel_cover"/>
-      <child link="${prefix}right_swivel_wheel"/>
-    </joint>
 
     
     <link name="${prefix}urg04lx"/>    
