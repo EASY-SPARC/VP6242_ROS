@@ -1,8 +1,8 @@
 <launch>
-  <arg name="file" default="vp6242.xacro" />
+  <arg name="file" default="urdf/vp6242.xacro" />
 
   <param name="robot_description"
-    command="$(find xacro)/xacro.py '$(find vp6242_description)/urdf/$(arg file)'" />
+    command="$(find xacro)/xacro.py '$(find vp6242_description)/$(arg file)'" />
 
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">

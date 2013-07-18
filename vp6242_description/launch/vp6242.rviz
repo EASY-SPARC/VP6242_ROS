@@ -202,17 +202,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.700421
+      Distance: 1.73422
       Focal Point:
         X: 0.347237
         Y: 0.053453
         Z: 0.407394
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.099797
+      Pitch: -0.170202
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.33407
+      Yaw: 0.684066
     Saved: ~
 Window Geometry:
   Displays:
