@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Properties (Constants) -->
+<property name="M_PI" value="3.14159"/>
+<xacro:macro name="pioneer_wheel" params="suffix parent reflect">
+ <link name="p3dx_${suffix}_wheel">
+   <visual>
+    <geometry>
+      <mesh filename="${mesh_path}/main.dae" scale="${mesh_scale}"/>
+    </geometry>
+        <xacro:mesh_origin/>        
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh_path}/main_collision.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <xacro:mesh_origin/>        
+      </collision>
+
+  
+
+  
+ </link>

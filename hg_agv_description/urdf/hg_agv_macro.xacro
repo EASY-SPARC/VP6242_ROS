@@ -27,9 +27,10 @@
         <xacro:mesh_origin/>        
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="5"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        <origin xyz="-0.091316 0 0.184078" rpy="0 0 0"/>
+        <mass value="23.911"/>
+        <inertia  ixx="5.748" ixy="3.453" ixz="0.413" 
+                  iyy="6.144" iyz="0.002" izz="1.131"/>
       </inertial>
     </link>
     
@@ -53,10 +54,11 @@
         <xacro:mesh_origin/>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="1"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-      </inertial>
+        <mass value="1.031"/> 
+        <origin xyz="0 0.015293 0"/>
+          <inertia ixx="0.005" ixy="0" ixz="0"
+                   iyy="0.007" iyz="0" izz="0.005"/>
+      </inertial>    
     </link>
     
     <joint name="${prefix}left_wheel_joint" type="continuous">
@@ -80,12 +82,12 @@
         <xacro:mesh_origin/>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="1"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-      </inertial>
-    </link>
-    
+        <mass value="1.031"/> 
+        <origin xyz="0 -0.015293 0"/>
+          <inertia ixx="0.005" ixy="0" ixz="0"
+                   iyy="0.007" iyz="0" izz="0.005"/>
+      </inertial>    
+    </link>    
     <joint name="${prefix}right_wheel_joint" type="continuous">
       <axis xyz="0 1 0"/>
       <origin rpy="0 0 0" xyz="0 -0.1956 0"/>
@@ -93,53 +95,101 @@
       <child link="${prefix}right_wheel"/>
     </joint>
     
-    <link name="${prefix}urg04lx">      
+    
+    <link name="${prefix}left_swivel_base">      
       <visual>
         <geometry>
-          <mesh filename="${mesh_path}/urg04lx.dae" scale="${mesh_scale}"/>
+          <mesh filename="${mesh_path}/swivel_base.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      </visual>
+    </link>
+    <joint name="${prefix}base_left_swivel_base" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.605 0.12 -0.012"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}left_swivel_base"/>
+    </joint>
+    <link name="${prefix}left_swivel_cover">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_cover.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      </visual>
+    </link>
+    <joint name="${prefix}left_swivel_base_cover" type="continuous">
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      <parent link="${prefix}left_swivel_base"/>
+      <child link="${prefix}left_swivel_cover"/>
+    </joint>
+    <link name="${prefix}left_swivel_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_wheel.dae" scale="${mesh_scale}"/>
         </geometry>
         <xacro:mesh_origin/>
       </visual>
-      <collision>
+    </link>
+    <joint name="${prefix}left_swivel_cover_wheel" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      <parent link="${prefix}left_swivel_cover"/>
+      <child link="${prefix}left_swivel_wheel"/>
+    </joint>
+    
+    <link name="${prefix}right_swivel_base">      
+      <visual>
         <geometry>
-          <mesh filename="${mesh_path}/urg04lx_collision.dae" scale="${mesh_scale}"/>
+          <mesh filename="${mesh_path}/swivel_base.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      </visual>
+    </link>
+    <joint name="${prefix}base_right_swivel_base" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.605 -0.12 -0.012"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}right_swivel_base"/>
+    </joint>
+    <link name="${prefix}right_swivel_cover">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_cover.dae" scale="${mesh_scale}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      </visual>
+    </link>
+    <joint name="${prefix}right_swivel_base_cover" type="continuous">
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="0 0 -0.01"/>
+      <parent link="${prefix}right_swivel_base"/>
+      <child link="${prefix}right_swivel_cover"/>
+    </joint>
+    <link name="${prefix}right_swivel_wheel">      
+      <visual>
+        <geometry>
+          <mesh filename="${mesh_path}/swivel_wheel.dae" scale="${mesh_scale}"/>
         </geometry>
         <xacro:mesh_origin/>
-      </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="1"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-      </inertial>
+      </visual>
     </link>
+    <joint name="${prefix}right_swivel_cover_wheel" type="continuous">
+      <axis xyz="0 1 0"/>
+      <origin rpy="0 0 0" xyz="-0.033 0 -0.054"/>
+      <parent link="${prefix}right_swivel_cover"/>
+      <child link="${prefix}right_swivel_wheel"/>
+    </joint>
+
     
-    <joint name="${prefix}base-urg40lx" type="fixed">
+    <link name="${prefix}urg04lx"/>    
+    <joint name="${prefix}base_urg40lx" type="fixed">
       <origin rpy="0 0 0" xyz="0.08 0 0.134"/>
       <parent link="${prefix}base_link"/>
       <child link="${prefix}urg04lx"/>
     </joint>
     
-    <link name="${prefix}utm30lx">      
-      <visual>
-        <geometry>
-          <mesh filename="${mesh_path}/utm30lx.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </visual>
-      <collision>
-        <geometry>
-          <mesh filename="${mesh_path}/utm30lx_collision.dae" scale="${mesh_scale}"/>
-        </geometry>
-        <xacro:mesh_origin/>
-      </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="1"/>
-        <inertia  ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
-      </inertial>
-    </link>
-    
-    <joint name="${prefix}base-utm30lx" type="fixed">
+    <link name="${prefix}utm30lx"/>          
+    <joint name="${prefix}base_utm30lx" type="fixed">
       <origin rpy="0 0 0" xyz="-0.1805 0 1.914"/>
       <parent link="${prefix}base_link"/>
       <child link="${prefix}utm30lx"/>
