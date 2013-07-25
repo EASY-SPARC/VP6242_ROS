@@ -97,7 +97,9 @@ public:
                      const std::vector<double> &ik_seed_state,
                      std::vector<double> &solution,
                      moveit_msgs::MoveItErrorCodes &error_code,
-                     bool lock_redundant_joints = false) const;
+                     const kinematics::KinematicsQueryOptions &options = kinematics::KinematicsQueryOptions()) const;
+
+
 
   /**
    * @brief Given a desired pose of the end-effector, search for the joint angles required to reach it.
@@ -112,7 +114,7 @@ public:
                         double timeout,
                         std::vector<double> &solution,
                         moveit_msgs::MoveItErrorCodes &error_code,
-                        bool lock_redundant_joints = false) const;
+                        const kinematics::KinematicsQueryOptions &options = kinematics::KinematicsQueryOptions()) const;
 
   /**
    * @brief Given a desired pose of the end-effector, search for the joint angles required to reach it.
@@ -129,7 +131,7 @@ public:
                         const std::vector<double> &consistency_limits,
                         std::vector<double> &solution,
                         moveit_msgs::MoveItErrorCodes &error_code,
-                        bool lock_redundant_joints = false) const;
+                        const kinematics::KinematicsQueryOptions &options = kinematics::KinematicsQueryOptions()) const;
 
   /**
    * @brief Given a desired pose of the end-effector, search for the joint angles required to reach it.
@@ -145,7 +147,7 @@ public:
                         std::vector<double> &solution,
                         const IKCallbackFn &solution_callback,
                         moveit_msgs::MoveItErrorCodes &error_code,
-                        bool lock_redundant_joints = false) const;
+                        const kinematics::KinematicsQueryOptions &options = kinematics::KinematicsQueryOptions()) const;
 
   /**
    * @brief Given a desired pose of the end-effector, search for the joint angles required to reach it.
@@ -164,7 +166,7 @@ public:
                         std::vector<double> &solution,
                         const IKCallbackFn &solution_callback,
                         moveit_msgs::MoveItErrorCodes &error_code,
-                        bool lock_redundant_joints = false) const;
+                        const kinematics::KinematicsQueryOptions &options = kinematics::KinematicsQueryOptions()) const;
 
   /**
    * @brief Given a set of joint angles and a set of links, compute their pose
@@ -538,7 +540,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            double timeout,
                                            std::vector<double> &solution,
                                            moveit_msgs::MoveItErrorCodes &error_code,
-                                           bool lock_redundancy) const
+                                           const kinematics::KinematicsQueryOptions &options) const
 {
   const IKCallbackFn solution_callback = 0;
   std::vector<double> consistency_limits;
@@ -550,7 +552,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                           solution,
                           solution_callback,
                           error_code,
-                          lock_redundancy);
+                          options);
 }
     
 bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose,
@@ -559,7 +561,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            const std::vector<double> &consistency_limits,
                                            std::vector<double> &solution,
                                            moveit_msgs::MoveItErrorCodes &error_code,
-                                           bool lock_redundancy) const
+                                           const kinematics::KinematicsQueryOptions &options) const
 {
   const IKCallbackFn solution_callback = 0; 
   return searchPositionIK(ik_pose,
@@ -569,7 +571,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                           solution,
                           solution_callback,
                           error_code,
-                          lock_redundancy);
+                          options);
 }
 
 bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose,
@@ -578,7 +580,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                            std::vector<double> &solution,
                                            const IKCallbackFn &solution_callback,
                                            moveit_msgs::MoveItErrorCodes &error_code,
-                                           bool lock_redundancy) const
+                                           const kinematics::KinematicsQueryOptions &options) const
 {
   std::vector<double> consistency_limits;
   return searchPositionIK(ik_pose,
@@ -588,7 +590,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                           consistency_limits,
                           solution_callback,
                           error_code,
-                          lock_redundancy);
+                          options);
 }
 
 bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose,
@@ -598,7 +600,7 @@ bool IKFastKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose &ik_pose
                                               std::vector<double> &solution,
                                               const IKCallbackFn &solution_callback,
                                               moveit_msgs::MoveItErrorCodes &error_code,
-                                              bool lock_redundant_joints) const
+                                              const kinematics::KinematicsQueryOptions &options) const
 {
   ROS_DEBUG_STREAM_NAMED("ikfast","searchPositionIK");
 
@@ -768,7 +770,7 @@ bool IKFastKinematicsPlugin::getPositionIK(const geometry_msgs::Pose &ik_pose,
                                            const std::vector<double> &ik_seed_state,
                                            std::vector<double> &solution,
                                            moveit_msgs::MoveItErrorCodes &error_code,
-                                           bool lock_redundant_joints) const
+                                           const kinematics::KinematicsQueryOptions &options) const
 {
   ROS_DEBUG_STREAM_NAMED("ikfast","getPositionIK");
 
