@@ -1,11 +1,5 @@
-# hiveground-robots #
-Various descriptions and settings for robots from HiveGround and other makers.
-
-## HiveGround ##
-Coming soon...
-
-## Other Makers ##
-###Denso###
-- VP-6242G
-
+## ROS package for Denso VP6242
+- Fixed Gazebo launcher issues
+- Packages for ros_control working
+- [TODO] Add Robotiq Gripper support
 
