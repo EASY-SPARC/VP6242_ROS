@@ -9,8 +9,8 @@
   </xacro:macro>
   <xacro:property name="mesh_path" value="package://vp6242_description/meshes" />
   <xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
-  <xacro:property name="default_joint_velocity" value="1.0" />
-  <xacro:property name="default_joint_effort" value="100000" />
+  <xacro:property name="default_joint_velocity" value="0.8" />
+  <xacro:property name="default_joint_effort" value="25000" />
   <xacro:property name="joint1_min" value="-2.792526803"/>
   <xacro:property name="joint1_max" value="2.792526803"/>
   <xacro:property name="joint2_min" value="-2.094395102"/>
