@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(vp6242_moveit_ikfast_plugin)
+add_compile_options(-std=c++11)
 
-find_package(Eigen REQUIRED)
-include_directories(SYSTEM ${EIGEN_INCLUDE_DIRS})
+# find_package(Eigen REQUIRED)
+# include_directories(SYSTEM ${EIGEN_INCLUDE_DIRS})
+
+# Eigen 3.2 (Wily) only provides EIGEN3_INCLUDE_DIR, not EIGEN3_INCLUDE_DIRS
+if(NOT EIGEN3_INCLUDE_DIRS)
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
 
 find_package(catkin REQUIRED COMPONENTS
   moveit_core
@@ -41,18 +47,3 @@ install(
   DESTINATION
   ${CATKIN_PACKAGE_SHARE_DESTINATION}
   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
