@@ -5,6 +5,12 @@
 - Fixed tranmission control issues
 - Packages for ros_control working
 
+### Dependencies
+```
+sudo apt-get install ros-$ROS_DISTRO-moveit
+sudo apt-get install ros-$ROS_DISTRO-effort-controllers
+```
+
 ### How to run
 
 You can run RViz environment with:
