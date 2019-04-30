@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
    <!-- Limits Joint: J1 J2 J3 J4 J5 J6
                Max : 160 120 160 160 120 360
                Min :-160 -120 19 -160 -120 -360 -->
