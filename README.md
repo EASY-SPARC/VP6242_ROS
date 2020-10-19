@@ -1,14 +1,11 @@
 ## ROS package for Denso VP6242
 
-### Changes
-- Fixed Eigen dependencies
-- Fixed tranmission control issues
-- Packages for ros_control working
-
 ### Dependencies
 ```
-sudo apt-get install ros-$ROS_DISTRO-moveit
-sudo apt-get install ros-$ROS_DISTRO-effort-controllers
+sudo apt install ros-melodic-moveit
+sudo apt install ros-melodic-ros-control
+sudo apt install ros-melodic-ros-controllers
+sudo apt install ros-melodic-joint-state-publisher-gui
 ```
 
 ### How to run
@@ -23,14 +20,6 @@ You can run Gazebo environment with:
 roslaunch vp6242_gazebo vp6242.launch
 ```
 
-### To Do
-- Add Robotiq Gripper support
-- Learn how to use controller_nterface
-- Learn how to use Ik-Fast
-
-
-
 ### Further information
 - https://densorobotics.com/content/user_manuals/19/005929.html
 - http://wiki.ros.org/ros_control
-- http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/ikfast/ikfast_tutorial.html
